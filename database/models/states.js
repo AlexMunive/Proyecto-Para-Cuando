@@ -3,42 +3,47 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Roles extends Model {
+  class States extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Roles.hasMany(models.Profiles)  
+      States.belongsTo(models.Countries, {as: 'countries', foreignKey: 'country_id'})
+      States.hasMany(models.Cities)
     }
   }
-  Roles.init({
+  States.init({
     id: {
-      allowNull: false,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      type: DataTypes.UUID
+      type: DataTypes.UUID 
+    },
+    country_id: {
+      type: DataTypes.UUID,
+      foreignKey: true,
+      references: {
+        model: 'Countries', 
+        key: 'id',        
+      },
+      onUpdate: 'CASCADE', 
+      onDelete: 'CASCADE' 
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
+    }
   }, {
     sequelize,
-    modelName: 'Roles',
-    tableName: 'Roles',
+    modelName: 'States',
+    tableName: 'States',
     underscored: true,  
     timestamps: true,
     scopes: {
       public_view: {
-        attributes: ['id','name']
-      },
-      no_timestamps: {
-        attributes: {exclude: ['created_at', 'updated_at']}
-      },
-    },
-
+        attributes: ['id','country_id','name']
+      }
+    }
   });
-  return Roles;
+  return States;
 };
