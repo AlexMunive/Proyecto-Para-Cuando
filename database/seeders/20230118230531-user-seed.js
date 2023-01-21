@@ -2,6 +2,8 @@
 
 const { Op } = require('sequelize')
 const {v4: uuid4} = require('uuid')
+const bcrypt = require('bcrypt')
+const authConfig = require('../config/auth')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -14,9 +16,9 @@ module.exports = {
           first_name: 'juancho',
           last_name: 'panchito',
           email: 'panchito156@gmail.com',
-          username: 'panchito', 
-          password: 'juancho456',  
-          created_at: new Date(),
+          username: 'panchito',             
+          password: 'juancho456',           // bcrypt.hashSync('juancho456', authConfig.rounds)     
+          created_at: new Date(), 
           updated_at: new Date()
         }
       ], { transaction })

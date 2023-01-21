@@ -11,7 +11,7 @@ module.exports = {
       await queryInterface.bulkInsert('States', [
         {
           id: uuid4(),
-          country_id: 'b5e37df4-931a-49b8-b9dd-1d8d6f29e354',
+          country_id: 'f024504f-40ff-434e-b3f8-a26ee7419ffd',
           name: 'baja california',  
           created_at: new Date(),
           updated_at: new Date()

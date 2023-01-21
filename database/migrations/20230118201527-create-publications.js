@@ -21,7 +21,7 @@ module.exports = {
         onUpdate: 'CASCADE', 
         onDelete: 'CASCADE' 
       },
-      pubicationTypeId: {
+      publicationTypeId: {
         type: Sequelize.UUID,
         allowNull: false, 
         field: 'publication_type_id',
