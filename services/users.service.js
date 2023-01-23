@@ -69,7 +69,7 @@ class UsersService {
     return user
   }
 
-  async updateUser(id, { name }) {
+  async updateUser(id, { first_name, last_name, username }) {
     const transaction = await models.sequelize.transaction()
     try {
       let user = await models.Users.findByPk(id)
@@ -77,7 +77,9 @@ class UsersService {
       if (!user) throw new CustomError('Not found user', 404, 'Not Found')
 
       let updatedUser = await user.update({
-        name
+        first_name,
+        last_name,
+        username,    
       }, { transaction })
 
       await transaction.commit()

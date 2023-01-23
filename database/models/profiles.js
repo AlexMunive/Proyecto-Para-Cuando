@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Profiles.belongsTo(models.Users, {as: 'users', foreignKey: 'user_id'})
       Profiles.belongsTo(models.Roles, {as: 'roles', foreignKey: 'role_id'})
-      Profiles.belongsTo(models.Countries, {as: 'countries', foreignKey: 'country_id'})
-      Profiles.belongsToMany(models.Publications, {as: 'votes', through: models.Votes})
+      Profiles.belongsTo(models.Countries, {as: 'country', foreignKey: 'country_id'})
+      Profiles.belongsToMany(models.Publications, { through: models.Votes, foreignKey: 'profile_id'})
     }
   }
   Profiles.init({

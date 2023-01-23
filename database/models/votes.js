@@ -15,12 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Votes.init({
-    id: {
-      allowNull: false,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-      type: DataTypes.UUID
-    },
+
     publication_id: {
       type: DataTypes.UUID,
       foreignKey: true,
